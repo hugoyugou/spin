@@ -22,6 +22,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     AnimatedImageComponent,
     FrameComponent,
     ReversePipe,
-    TimelineComponent
+    TimelineComponent,
+    ImageSelectorComponent
   ],
   imports: [
     BrowserModule,
