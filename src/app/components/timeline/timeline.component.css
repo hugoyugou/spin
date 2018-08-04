@@ -1,0 +1,24 @@
+.frame {
+    display: inline-block;
+    padding: 4px;
+    width: 64px;
+    height: 64px;
+}
+
+.frame ::ng-deep img {
+    width: 64px;
+    height: 64px;
+}
+
+.current {
+    background: #3f8bee;
+}
+
+.timeline {
+    height: 88px;
+    width: 256px;
+    border: 1px solid #000;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+}

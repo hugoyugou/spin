@@ -1,3 +1,8 @@
-<p>
-  timeline works!
-</p>
+<div class="timeline" *ngIf="animatedImage$ | async as animatedImage">
+  <app-frame
+    class="frame"
+    [ngClass]="{'current': frame.id == animatedImage.current}"
+    *ngFor="let frame of animatedImage.frames"
+    [frame]="frame">
+  </app-frame>
+</div>
