@@ -1,3 +1,4 @@
-<p>
-  image-selector works!
-</p>
+<input (change)="onFileChange($event.target.files)" class="hidden" id="file-picker" type="file" accept="image/*" />
+<button (click)="onPickButtonClick($event)" mat-flat-button color="primary">
+  Pick an image
+</button>

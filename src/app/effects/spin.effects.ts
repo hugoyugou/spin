@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { SpinActionTypes, Ready, Update, ReadyPayload, NextFrame } from '../actions/spin.actions';
+import { SpinActionTypes, Ready, Update, ReadyPayload, NextFrame, SourceChange, SourceLoaded, SourceLoadedPayload } from '../actions/spin.actions';
 import { withLatestFrom, map, mergeMap, switchMap, takeUntil, mapTo } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
-import { selectSource, selectSpeed, selectSize } from '../reducers/spin.reducer';
+import { selectSource, selectSpeed, selectSize, errorImage } from '../reducers/spin.reducer';
 import { ImageService } from '../services/image.service';
 import { EditableImage } from '../models/EditableImage.model';
 import { Frame } from '../models/Frame.model';
@@ -12,6 +12,36 @@ import { from, timer } from 'rxjs';
 
 @Injectable()
 export class SpinEffects {
+
+  @Effect()
+  spinSourceChange$ = this.actions$.pipe(
+    ofType(SpinActionTypes.SourceChange),
+    map((action: SourceChange) => action.payload),
+    switchMap((payload) => {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = payload.uri;
+        image.addEventListener('load', () => {
+          const sourceLoadedPayload = {
+            image
+          } as SourceLoadedPayload;
+          resolve(new SourceLoaded(sourceLoadedPayload));
+        });
+        image.addEventListener('error', () => {
+          const sourceLoadedPayload = {
+            image: errorImage
+          } as SourceLoadedPayload;
+          resolve(new SourceLoaded(sourceLoadedPayload));
+        });
+      });
+    })
+  )
+
+  @Effect()
+  spinSourceLoaded$ = this.actions$.pipe(
+    ofType(SpinActionTypes.SourceLoaded),
+    mapTo(new Update())
+  )
 
   @Effect()
   spinUpdate$ = this.actions$.pipe(
@@ -47,11 +77,6 @@ export class SpinEffects {
       payload.image = this.imageService.radialBlur(image, blurFactor);
       return payload;
     }),
-    map((payload) => {
-      const { image } = payload;
-      payload.image = this.imageService.circleMask(image);
-      return payload;
-    }),
     mergeMap((payload) => {
       const { image, options } = payload;
       const { speed } = options;
@@ -73,6 +98,11 @@ export class SpinEffects {
           return payload;
         })
       )
+    }),
+    map((payload) => {
+      const { image } = payload;
+      payload.image = this.imageService.circleMask(image);
+      return payload;
     }),
     map((payload) => {
       const { image, options } = payload;

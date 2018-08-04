@@ -11,8 +11,11 @@ export interface State {
   isPause: boolean
 }
 
-const defaultImage = new Image();
+export const defaultImage = new Image();
 defaultImage.src = '/assets/img/defaultImage.png';
+
+export const errorImage = new Image();
+errorImage.src = '/assets/img/errorImage.png';
 
 export const initialState: State = {
   size: 256,
@@ -42,6 +45,12 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: SpinActions): State {
   switch (action.type) {
+    case SpinActionTypes.SourceLoaded: {
+      return {
+        ...state,
+        source: action.payload.image
+      };
+    }
 
     case SpinActionTypes.Update:
       return state;
