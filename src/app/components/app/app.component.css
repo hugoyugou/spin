@@ -8,3 +8,7 @@
 .actions {
     display: block;
 }
+
+.speed {
+    width: 256px;
+}

@@ -19,13 +19,17 @@ export class ImageService implements OnDestroy {
   animatedImage$: Observable<AnimatedImage>;
   destroy$ = new Subject<boolean>();
 
+  speedToFramesLUT = [
+    1, 50, 40, 30, 25, 20, 15, 12, 8, 6, 5, 4, 3
+  ];
+
 
   constructor(public store: Store<State>) {
     this.animatedImage$ = this.store.select(selectAnimatedImage);
     this.animatedImage$.pipe(takeUntil(this.destroy$)).subscribe((animatedImage) => {
       this.animatedImage = animatedImage;
     });
-   }
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next(true);
@@ -122,28 +126,44 @@ export class ImageService implements OnDestroy {
     const frames = this.animatedImage.frames;
     const size = this.animatedImage.height;
     encoder.setSize(this.animatedImage.width, this.animatedImage.height);
-    let pendingFrames: {[id: number]: Frame} = {};
+    let pendingFrames: { [id: number]: Frame } = {};
     frames.forEach((frame) => {
       pendingFrames[frame.id] = frame;
     });
     encoder.start();
-    
+
     encoder.setTransparent(0x36393f);
-    Object.keys(pendingFrames).sort((a, b) => parseInt(a) - parseInt(b)).forEach((id)=> {
+    Object.keys(pendingFrames).sort((a, b) => parseInt(a) - parseInt(b)).forEach((id) => {
       const frame: Frame = pendingFrames[id];
-      
+
       const newCanvas = this.copyCanvas(frame.canvas);
-      const context = newCanvas.getContext('2d');     
+      const context = newCanvas.getContext('2d');
       context.save();
-      context.fillStyle = "#36393f";  
-      context.fillRect (0, 0, size, size);
+      context.fillStyle = "#36393f";
+      context.fillRect(0, 0, size, size);
       context.drawImage(frame.canvas, 0, 0, size, size);
       context.restore();
 
       encoder.addFrame(context);
     });
     encoder.finish();
-    encoder.download("spin-"+ Math.floor(new Date().getTime()/1000) +".gif");
+    encoder.download("spin-" + Math.floor(new Date().getTime() / 1000) + ".gif");
+  }
+
+  speedToFrames(speed: number): number {
+    return this.speedToFramesLUT[
+      Math.max(
+        0,
+        Math.min(
+          this.getMaxSpeed(),
+          speed
+        )
+      )
+    ];
+  }
+
+  getMaxSpeed(): number {
+    return this.speedToFramesLUT.length - 1;
   }
 
 }

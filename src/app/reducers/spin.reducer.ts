@@ -1,7 +1,6 @@
 import { Action, createFeatureSelector, createSelector } from '@ngrx/store';
 import { SpinActions, SpinActionTypes } from '../actions/spin.actions';
 import { AnimatedImage } from '../models/AnimatedImage.model';
-import { Frame } from '../models/Frame.model';
 
 export interface State {
   size: number
@@ -98,6 +97,22 @@ export function reducer(state = initialState, action: SpinActions): State {
         ...state,
         isPause: true
       };
+
+    case SpinActionTypes.SpeedChange:
+      return {
+        ...state,
+        speed: action.payload.speed
+      };
+
+    case SpinActionTypes.PrepareFrames: {
+      return {
+        ...state,
+        animatedImage: {
+          ...state.animatedImage,
+          frames: state.animatedImage.frames.filter((frame) => frame.id < action.payload.totalFrames)
+        }
+      }
+    }
 
 
     default:

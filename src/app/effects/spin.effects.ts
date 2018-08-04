@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { SpinActionTypes, Ready, Update, ReadyPayload, NextFrame, SourceChange, SourceLoaded, SourceLoadedPayload } from '../actions/spin.actions';
-import { withLatestFrom, map, mergeMap, switchMap, takeUntil, mapTo, debounce, debounceTime } from 'rxjs/operators';
+import { SpinActionTypes, Ready, Update, ReadyPayload, NextFrame, SourceChange, SourceLoaded, SourceLoadedPayload, PrepareFrames, PrepareFramesPayload } from '../actions/spin.actions';
+import { withLatestFrom, map, mergeMap, switchMap, takeUntil, mapTo, debounce, debounceTime, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
 import { selectSource, selectSpeed, selectSize, errorImage } from '../reducers/spin.reducer';
@@ -77,10 +77,20 @@ export class SpinEffects {
       payload.image = this.imageService.radialBlur(image, blurFactor);
       return payload;
     }),
+    tap((payload) => {
+      const { image, options } = payload;
+      const { speed } = options;
+      let totalFrames = this.imageService.speedToFrames(speed);
+      // Anti-pattern
+      const prepareFramesPayload = {
+        totalFrames
+      } as PrepareFramesPayload;
+      this.store$.dispatch(new PrepareFrames(prepareFramesPayload));
+    }),
     mergeMap((payload) => {
       const { image, options } = payload;
       const { speed } = options;
-      let totalFrames = speedToFrames(speed);
+      let totalFrames = this.imageService.speedToFrames(speed);
       let frameArray = Array.from(Array(totalFrames).keys());
       return from(frameArray).pipe(
         map((frameId) => {
@@ -150,6 +160,13 @@ export class SpinEffects {
     })
   )
 
+  @Effect()
+  speedUpdate$ = this.actions$.pipe(
+    ofType(SpinActionTypes.SpeedChange),
+    debounceTime(100),
+    mapTo(new Update())
+  );
+
   constructor(private actions$: Actions, private store$: Store<State>, private imageService: ImageService) {
     (<any>window).store = this.store$;
   }
@@ -165,20 +182,4 @@ interface SpinOptions {
   blur: boolean
   speed: number
   clockwise: boolean
-}
-
-const speedToFramesLUT = [
-  1, 50, 25, 12, 6, 3
-];
-
-const speedToFrames = (speed: number) => {
-  return speedToFramesLUT[
-    Math.max(
-      0,
-      Math.min(
-        speedToFramesLUT.length - 1,
-        speed
-      )
-    )
-  ]
 }

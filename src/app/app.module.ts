@@ -22,6 +22,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSliderModule } from '@angular/material/slider';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
 import { DownloadComponent } from './components/download/download.component';
 
@@ -41,6 +42,7 @@ import { DownloadComponent } from './components/download/download.component';
 
     MatIconModule,
     MatButtonModule,
+    MatSliderModule,
 
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
