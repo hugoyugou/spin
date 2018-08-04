@@ -23,6 +23,7 @@ import { TimelineComponent } from './components/timeline/timeline.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ImageSelectorComponent } from './components/image-selector/image-selector.component';
+import { DownloadComponent } from './components/download/download.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ImageSelectorComponent } from './components/image-selector/image-select
     FrameComponent,
     ReversePipe,
     TimelineComponent,
-    ImageSelectorComponent
+    ImageSelectorComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,
