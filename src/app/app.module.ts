@@ -15,6 +15,8 @@ import { FrameComponent } from './components/frame/frame.component';
 import { ReversePipe } from './pipes/reverse.pipe';
 import * as fromPreview from './reducers/preview.reducer';
 import { PreviewEffects } from './effects/preview.effects';
+import * as fromAnimatedImage from './reducers/animated-image.reducer';
+import { AnimatedImageEffects } from './effects/animated-image.effects';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,9 @@ import { PreviewEffects } from './effects/preview.effects';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     StoreModule.forFeature('spin', fromSpin.reducer),
-    EffectsModule.forFeature([SpinEffects, PreviewEffects]),
-    StoreModule.forFeature('preview', fromPreview.reducer)
+    EffectsModule.forFeature([SpinEffects, PreviewEffects, AnimatedImageEffects]),
+    StoreModule.forFeature('preview', fromPreview.reducer),
+    StoreModule.forFeature('animatedImage', fromAnimatedImage.reducer)
   ],
   providers: [],
   bootstrap: [AppComponent]
