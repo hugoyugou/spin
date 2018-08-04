@@ -17,6 +17,7 @@ import * as fromPreview from './reducers/preview.reducer';
 import { PreviewEffects } from './effects/preview.effects';
 import * as fromAnimatedImage from './reducers/animated-image.reducer';
 import { AnimatedImageEffects } from './effects/animated-image.effects';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AnimatedImageEffects } from './effects/animated-image.effects';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
