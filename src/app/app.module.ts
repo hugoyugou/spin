@@ -10,10 +10,12 @@ import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './effects/app.effects';
 import * as fromSpin from './reducers/spin.reducer';
 import { SpinEffects } from './effects/spin.effects';
+import { GifComponent } from './components/gif/gif.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    GifComponent
   ],
   imports: [
     BrowserModule,
