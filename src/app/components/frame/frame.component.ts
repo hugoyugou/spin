@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Frame } from '../../models/Frame.model';
 
 @Component({
   selector: 'app-frame',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./frame.component.css']
 })
 export class FrameComponent implements OnInit {
+  @Input() frame: Frame;
 
   constructor() { }
 
