@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EditableImage } from '../models/EditableImage.model';
-import { BlurFilter } from './blur';
+import { BlurFilter } from '../../lib/BlurFilter';
 
 @Injectable({
   providedIn: 'root'
