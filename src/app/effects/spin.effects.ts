@@ -104,7 +104,7 @@ export class SpinEffects {
   playback$ = this.actions$.pipe(
     ofType(SpinActionTypes.Play),
     switchMap(() => timer(0, 20).pipe(
-      takeUntil(this.actions$.ofType(SpinActionTypes.Pause, SpinActionTypes.Pause)),
+      takeUntil(this.actions$.ofType(SpinActionTypes.Pause, SpinActionTypes.Stop)),
       mapTo(new NextFrame())
     ))
   );
