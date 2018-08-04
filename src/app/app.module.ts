@@ -12,12 +12,14 @@ import * as fromSpin from './reducers/spin.reducer';
 import { SpinEffects } from './effects/spin.effects';
 import { GifComponent } from './components/gif/gif.component';
 import { FrameComponent } from './components/frame/frame.component';
+import { ReversePipe } from './pipes/reverse.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     GifComponent,
-    FrameComponent
+    FrameComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,
