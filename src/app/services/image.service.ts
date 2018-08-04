@@ -125,7 +125,11 @@ export class ImageService implements OnDestroy {
     encoder.setDelay(20);
     const frames = this.animatedImage.frames;
     const size = this.animatedImage.height;
-    encoder.setSize(this.animatedImage.width, this.animatedImage.height);
+    const scaleFactor = 0.375;
+    const downSize = Math.floor(this.animatedImage.height * scaleFactor);
+    const width = downSize;
+    const height = downSize;
+    encoder.setSize(width, height);
     let pendingFrames: { [id: number]: Frame } = {};
     frames.forEach((frame) => {
       pendingFrames[frame.id] = frame;
@@ -137,8 +141,12 @@ export class ImageService implements OnDestroy {
       const frame: Frame = pendingFrames[id];
 
       const newCanvas = this.copyCanvas(frame.canvas);
+      newCanvas.width = width;
+      newCanvas.height = height;
+
       const context = newCanvas.getContext('2d');
       context.save();
+      context.scale(scaleFactor, scaleFactor);
       context.fillStyle = "#36393f";
       context.fillRect(0, 0, size, size);
       context.drawImage(frame.canvas, 0, 0, size, size);
