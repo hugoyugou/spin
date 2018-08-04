@@ -85,7 +85,7 @@ export class SpinEffects {
       return from(frameArray).pipe(
         map((frameId) => {
           return {
-            image,
+            image: this.imageService.copy(image),
             options: {
               ...options,
               id: frameId
@@ -94,7 +94,7 @@ export class SpinEffects {
         }),
         map(payload => {
           const { image } = payload;
-          payload.image = this.imageService.rotate(image, 360 / totalFrames);
+          payload.image = this.imageService.rotate(image, payload.options.id * 360 / totalFrames);
           return payload;
         })
       )

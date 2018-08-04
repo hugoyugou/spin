@@ -20,6 +20,22 @@ export class ImageService {
     return image;
   }
 
+  copy(image: EditableImage) {
+    const { canvas, size, source } = image;
+    const newCanvas = this.copyCanvas(canvas);
+    const context = newCanvas.getContext('2d');
+    context.save();
+    context.globalCompositeOperation = 'copy';
+    context.drawImage(canvas, 0, 0, size, size);
+    context.restore();
+    const newImage = {
+      canvas: newCanvas,
+      size,
+      source,
+    } as EditableImage;
+    return newImage;
+  }
+
   copyCanvas(canvas: HTMLCanvasElement) {
     const newCanvas = document.createElement('canvas');
     newCanvas.width = canvas.width;
