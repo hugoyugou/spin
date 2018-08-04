@@ -18,13 +18,15 @@ import { PreviewEffects } from './effects/preview.effects';
 import * as fromAnimatedImage from './reducers/animated-image.reducer';
 import { AnimatedImageEffects } from './effects/animated-image.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AnimatedImageComponent,
     FrameComponent,
-    ReversePipe
+    ReversePipe,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
