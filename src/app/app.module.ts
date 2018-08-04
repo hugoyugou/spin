@@ -11,11 +11,13 @@ import { AppEffects } from './effects/app.effects';
 import * as fromSpin from './reducers/spin.reducer';
 import { SpinEffects } from './effects/spin.effects';
 import { GifComponent } from './components/gif/gif.component';
+import { FrameComponent } from './components/frame/frame.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GifComponent
+    GifComponent,
+    FrameComponent
   ],
   imports: [
     BrowserModule,
