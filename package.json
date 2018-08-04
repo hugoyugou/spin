@@ -1,6 +1,16 @@
 {
   "name": "spin",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/hugoyugou/spin",
+  "bugs": "https://github.com/hugoyugou/spin/issues",
+  "engines": {
+    "node": ">=8.9.1 <9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hugoyugou/spin.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
