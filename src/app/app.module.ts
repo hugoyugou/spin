@@ -13,6 +13,8 @@ import { SpinEffects } from './effects/spin.effects';
 import { AnimatedImageComponent } from './components/animated-image/animated-image.component';
 import { FrameComponent } from './components/frame/frame.component';
 import { ReversePipe } from './pipes/reverse.pipe';
+import * as fromPreview from './reducers/preview.reducer';
+import { PreviewEffects } from './effects/preview.effects';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { ReversePipe } from './pipes/reverse.pipe';
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     StoreModule.forFeature('spin', fromSpin.reducer),
-    EffectsModule.forFeature([SpinEffects])
+    EffectsModule.forFeature([SpinEffects, PreviewEffects]),
+    StoreModule.forFeature('preview', fromPreview.reducer)
   ],
   providers: [],
   bootstrap: [AppComponent]
