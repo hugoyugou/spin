@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "spin"
+  "defaultProject": "spin",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
