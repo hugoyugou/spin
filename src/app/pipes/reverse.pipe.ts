@@ -8,6 +8,6 @@ export class ReversePipe implements PipeTransform {
   transform(value) {
       if (!value) return;
 
-      return value.reverse();
+      return value.slice().reverse();
     }
 }
