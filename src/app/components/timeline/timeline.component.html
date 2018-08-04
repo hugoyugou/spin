@@ -1,14 +1,14 @@
 <ng-container *ngIf="isPause$ | async as isPause; else pause">
-  <button (click)="onPlayButtonClick($event)" mat-icon-button>
+  <button (click)="onPlayButtonClick()" mat-icon-button>
     <mat-icon>play_arrow</mat-icon>
   </button>
 </ng-container>
 <ng-template #pause>
-  <button (click)="onPauseButtonClick($event)" mat-icon-button>
+  <button (click)="onPauseButtonClick()" mat-icon-button>
     <mat-icon>pause</mat-icon>
   </button>
 </ng-template>
-<button (click)="onStopButtonClick($event)" mat-icon-button>
+<button (click)="onStopButtonClick()" mat-icon-button>
   <mat-icon>stop</mat-icon>
 </button>
 
