@@ -3,4 +3,5 @@ export interface Frame {
     uri: string
     delay: number
     keep?: boolean
+    canvas: HTMLCanvasElement
 }

@@ -4,3 +4,7 @@
     display: inline-block;
     border: 1px solid #333;
 }
+
+.actions {
+    display: block;
+}

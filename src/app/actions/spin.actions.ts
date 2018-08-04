@@ -11,6 +11,7 @@ export enum SpinActionTypes {
   Pause = '[Spin] Pause',
   Stop = '[Spin] Stop',
   NextFrame = '[Spin] NextFrame',
+  Download = '[Spin] Download',
 }
 
 export class SourceChange implements Action {
@@ -64,6 +65,10 @@ export class NextFrame implements Action {
   readonly type = SpinActionTypes.NextFrame;
 }
 
+export class Download implements Action {
+  readonly type = SpinActionTypes.Download;
+}
+
 export type SpinActions =
   | SourceChange
   | SourceLoaded
@@ -72,4 +77,5 @@ export type SpinActions =
   | Play
   | Pause
   | Stop
-  | NextFrame;
+  | NextFrame
+  | Download;

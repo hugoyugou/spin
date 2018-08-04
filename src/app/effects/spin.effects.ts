@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { SpinActionTypes, Ready, Update, ReadyPayload, NextFrame, SourceChange, SourceLoaded, SourceLoadedPayload } from '../actions/spin.actions';
-import { withLatestFrom, map, mergeMap, switchMap, takeUntil, mapTo } from 'rxjs/operators';
+import { withLatestFrom, map, mergeMap, switchMap, takeUntil, mapTo, debounce, debounceTime } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
 import { selectSource, selectSpeed, selectSize, errorImage } from '../reducers/spin.reducer';
@@ -106,13 +106,14 @@ export class SpinEffects {
     }),
     map((payload) => {
       const { image, options } = payload;
-      const { size } = image;
+      const { size, canvas } = image;
       const { id } = options;
       const frame = {
         id,
-        uri: image.canvas.toDataURL(),
+        uri: canvas.toDataURL(),
         delay: 200,
         keep: false,
+        canvas,
       } as Frame;
       const readyPayload = {
         size,
@@ -138,6 +139,16 @@ export class SpinEffects {
       mapTo(new NextFrame())
     ))
   );
+
+  // TODO: Dispatch success/fail action
+  @Effect({ dispatch: false })
+  download$ = this.actions$.pipe(
+    ofType(SpinActionTypes.Download),
+    debounceTime(500),
+    map(() => { // TODO: Use switchMap instead
+      this.imageService.exportGif();
+    })
+  )
 
   constructor(private actions$: Actions, private store$: Store<State>, private imageService: ImageService) {
     (<any>window).store = this.store$;

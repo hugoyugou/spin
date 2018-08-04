@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { State } from '../../reducers';
+import { Download } from '../../actions/spin.actions';
 
 @Component({
   selector: 'app-download',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DownloadComponent implements OnInit {
 
-  constructor() { }
+  constructor(public store: Store<State>) { }
 
   ngOnInit() {
+  }
+
+  onDownloadButtonClick(): void {
+    this.store.dispatch(new Download());
   }
 
 }
