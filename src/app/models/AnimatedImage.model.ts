@@ -1,6 +1,6 @@
 import { Frame } from "./Frame.model";
 
-export interface Gif {
+export interface AnimatedImage {
     height: number
     width: number
     frames: Frame[]

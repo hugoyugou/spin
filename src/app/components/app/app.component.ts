@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Gif } from '../../models/Gif.model';
+import { AnimatedImage } from '../../models/AnimatedImage.model';
 import { Frame } from '../../models/Frame.model';
 
 @Component({
@@ -10,7 +10,7 @@ import { Frame } from '../../models/Frame.model';
 export class AppComponent {
   title = 'spin';
 
-  gif: Gif = {
+  animatedImage: AnimatedImage = {
     current: 0,
     height: 256,
     width: 256,
@@ -28,5 +28,5 @@ export class AppComponent {
         keep: false,
       } as Frame
     ]
-  } as Gif;
+  } as AnimatedImage;
 }
