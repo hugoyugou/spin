@@ -8,6 +8,7 @@ export interface State {
   source: HTMLImageElement
   speed: number
   animatedImage: AnimatedImage
+  isPause: boolean
 }
 
 const defaultImage = new Image();
@@ -35,7 +36,8 @@ export const initialState: State = {
         keep: false,
       } as Frame
     ]
-  } as AnimatedImage
+  } as AnimatedImage,
+  isPause: true,
 };
 
 export function reducer(state = initialState, action: SpinActions): State {
@@ -77,7 +79,29 @@ export function reducer(state = initialState, action: SpinActions): State {
           ...state.animatedImage,
           current: (state.animatedImage.current + 1) % state.animatedImage.frames.length
         }
-      }
+      };
+
+    case SpinActionTypes.Play:
+      return {
+        ...state,
+        isPause: false
+      };
+
+    case SpinActionTypes.Stop:
+      return {
+        ...state,
+        isPause: true,
+        animatedImage: {
+          ...state.animatedImage,
+          current: 0
+        }
+      };
+
+    case SpinActionTypes.Pause:
+      return {
+        ...state,
+        isPause: true
+      };
 
 
     default:
@@ -105,4 +129,9 @@ export const selectSpeed = createSelector(
 export const selectAnimatedImage = createSelector(
   selectSpin,
   (state: State) => state.animatedImage
+);
+
+export const selectIsPause = createSelector(
+  selectSpin,
+  (state: State) => state.isPause
 );

@@ -1,3 +1,7 @@
+:host {
+    display: block;
+}
+
 .frame {
     display: inline-block;
     padding: 4px;
@@ -14,7 +18,7 @@
     background: #3f8bee;
 }
 
-.timeline {
+.frames {
     height: 88px;
     width: 256px;
     border: 1px solid #000;

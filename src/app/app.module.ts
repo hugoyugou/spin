@@ -20,6 +20,9 @@ import { AnimatedImageEffects } from './effects/animated-image.effects';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimelineComponent } from './components/timeline/timeline.component';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,10 @@ import { TimelineComponent } from './components/timeline/timeline.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
+    MatIconModule,
+    MatButtonModule,
+
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),

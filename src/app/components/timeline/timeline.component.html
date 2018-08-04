@@ -1,4 +1,18 @@
-<div class="timeline" *ngIf="animatedImage$ | async as animatedImage">
+<ng-container *ngIf="isPause$ | async as isPause; else pause">
+  <button (click)="onPlayButtonClick($event)" mat-icon-button>
+    <mat-icon>play_arrow</mat-icon>
+  </button>
+</ng-container>
+<ng-template #pause>
+  <button (click)="onPauseButtonClick($event)" mat-icon-button>
+    <mat-icon>pause</mat-icon>
+  </button>
+</ng-template>
+<button (click)="onStopButtonClick($event)" mat-icon-button>
+  <mat-icon>stop</mat-icon>
+</button>
+
+<div class="frames" *ngIf="animatedImage$ | async as animatedImage">
   <app-frame
     class="frame"
     [ngClass]="{'current': frame.id == animatedImage.current}"
