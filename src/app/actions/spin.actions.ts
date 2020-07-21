@@ -18,22 +18,22 @@ export enum SpinActionTypes {
 
 export class SourceChange implements Action {
   readonly type = SpinActionTypes.SourceChange;
-  
-  constructor(public payload: SourceChangePayload) { }
+
+  constructor(public payload: SourceChangePayload) {}
 }
 
 export interface SourceChangePayload {
-  uri: string
+  uri: string;
 }
 
 export class SourceLoaded implements Action {
   readonly type = SpinActionTypes.SourceLoaded;
-  
-  constructor(public payload: SourceLoadedPayload) { }
+
+  constructor(public payload: SourceLoadedPayload) {}
 }
 
 export interface SourceLoadedPayload {
-  image: HTMLImageElement
+  image: HTMLImageElement;
 }
 
 export class Update implements Action {
@@ -43,12 +43,12 @@ export class Update implements Action {
 export class Ready implements Action {
   readonly type = SpinActionTypes.Ready;
 
-  constructor(public payload: ReadyPayload) { }
+  constructor(public payload: ReadyPayload) {}
 }
 
 export interface ReadyPayload {
-  size: number
-  frame: Frame
+  size: number;
+  frame: Frame;
 }
 
 export class Play implements Action {
@@ -74,21 +74,21 @@ export class Download implements Action {
 export class SpeedChange implements Action {
   readonly type = SpinActionTypes.SpeedChange;
 
-  constructor(public payload: SpeedChangePayload) { }
+  constructor(public payload: SpeedChangePayload) {}
 }
 
 export interface SpeedChangePayload {
-  speed: number
+  speed: number;
 }
 
 export class PrepareFrames implements Action {
   readonly type = SpinActionTypes.PrepareFrames;
 
-  constructor(public payload: PrepareFramesPayload) { }
+  constructor(public payload: PrepareFramesPayload) {}
 }
 
 export interface PrepareFramesPayload {
-  totalFrames: number
+  totalFrames: number;
 }
 
 export type SpinActions =
@@ -102,4 +102,4 @@ export type SpinActions =
   | NextFrame
   | Download
   | SpeedChange
-  | PrepareFrames
+  | PrepareFrames;

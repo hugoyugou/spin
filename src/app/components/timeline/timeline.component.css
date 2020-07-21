@@ -1,28 +1,28 @@
 :host {
-    display: block;
+  display: block;
 }
 
 .frame {
-    display: inline-block;
-    padding: 4px;
-    width: 64px;
-    height: 64px;
+  display: inline-block;
+  padding: 4px;
+  width: 64px;
+  height: 64px;
 }
 
 .frame ::ng-deep img {
-    width: 64px;
-    height: 64px;
+  width: 64px;
+  height: 64px;
 }
 
 .current {
-    background: #3f8bee;
+  background: #3f8bee;
 }
 
 .frames {
-    height: 88px;
-    width: 256px;
-    border: 1px solid #000;
-    overflow-y: hidden;
-    overflow-x: scroll;
-    white-space: nowrap;
+  height: 88px;
+  width: 256px;
+  border: 1px solid #000;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
 }

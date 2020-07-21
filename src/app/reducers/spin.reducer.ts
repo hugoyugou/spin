@@ -3,11 +3,11 @@ import { SpinActions, SpinActionTypes } from '../actions/spin.actions';
 import { AnimatedImage } from '../models/AnimatedImage.model';
 
 export interface State {
-  size: number
-  source: HTMLImageElement
-  speed: number
-  animatedImage: AnimatedImage
-  isPause: boolean
+  size: number;
+  source: HTMLImageElement;
+  speed: number;
+  animatedImage: AnimatedImage;
+  isPause: boolean;
 }
 
 export const defaultImage = new Image();
@@ -24,7 +24,7 @@ export const initialState: State = {
     current: 0,
     height: 256,
     width: 256,
-    frames: []
+    frames: [],
   } as AnimatedImage,
   isPause: true,
 };
@@ -34,7 +34,7 @@ export function reducer(state = initialState, action: SpinActions): State {
     case SpinActionTypes.SourceLoaded: {
       return {
         ...state,
-        source: action.payload.image
+        source: action.payload.image,
       };
     }
 
@@ -62,8 +62,8 @@ export function reducer(state = initialState, action: SpinActions): State {
           ...state.animatedImage,
           height: payload.size,
           width: payload.size,
-          frames: frames
-        }
+          frames: frames,
+        },
       };
     }
 
@@ -72,14 +72,14 @@ export function reducer(state = initialState, action: SpinActions): State {
         ...state,
         animatedImage: {
           ...state.animatedImage,
-          current: (state.animatedImage.current + 1) % state.animatedImage.frames.length
-        }
+          current: (state.animatedImage.current + 1) % state.animatedImage.frames.length,
+        },
       };
 
     case SpinActionTypes.Play:
       return {
         ...state,
-        isPause: false
+        isPause: false,
       };
 
     case SpinActionTypes.Stop:
@@ -88,20 +88,20 @@ export function reducer(state = initialState, action: SpinActions): State {
         isPause: true,
         animatedImage: {
           ...state.animatedImage,
-          current: 0
-        }
+          current: 0,
+        },
       };
 
     case SpinActionTypes.Pause:
       return {
         ...state,
-        isPause: true
+        isPause: true,
       };
 
     case SpinActionTypes.SpeedChange:
       return {
         ...state,
-        speed: action.payload.speed
+        speed: action.payload.speed,
       };
 
     case SpinActionTypes.PrepareFrames: {
@@ -109,11 +109,10 @@ export function reducer(state = initialState, action: SpinActions): State {
         ...state,
         animatedImage: {
           ...state.animatedImage,
-          frames: state.animatedImage.frames.filter((frame) => frame.id < action.payload.totalFrames)
-        }
-      }
+          frames: state.animatedImage.frames.filter((frame) => frame.id < action.payload.totalFrames),
+        },
+      };
     }
-
 
     default:
       return state;
@@ -122,27 +121,12 @@ export function reducer(state = initialState, action: SpinActions): State {
 
 export const selectSpin = createFeatureSelector('spin');
 
-export const selectSize = createSelector(
-  selectSpin,
-  (state: State) => state.size
-);
+export const selectSize = createSelector(selectSpin, (state: State) => state.size);
 
-export const selectSource = createSelector(
-  selectSpin,
-  (state: State) => state.source
-);
+export const selectSource = createSelector(selectSpin, (state: State) => state.source);
 
-export const selectSpeed = createSelector(
-  selectSpin,
-  (state: State) => state.speed
-);
+export const selectSpeed = createSelector(selectSpin, (state: State) => state.speed);
 
-export const selectAnimatedImage = createSelector(
-  selectSpin,
-  (state: State) => state.animatedImage
-);
+export const selectAnimatedImage = createSelector(selectSpin, (state: State) => state.animatedImage);
 
-export const selectIsPause = createSelector(
-  selectSpin,
-  (state: State) => state.isPause
-);
+export const selectIsPause = createSelector(selectSpin, (state: State) => state.isPause);

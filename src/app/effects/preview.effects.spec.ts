@@ -10,10 +10,7 @@ describe('PreviewEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        PreviewEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [PreviewEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.get(PreviewEffects);

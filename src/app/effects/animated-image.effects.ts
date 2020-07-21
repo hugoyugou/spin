@@ -4,7 +4,6 @@ import { AnimatedImageActionTypes } from '../actions/animated-image.actions';
 
 @Injectable()
 export class AnimatedImageEffects {
-
   @Effect()
   loadFoos$ = this.actions$.pipe(ofType(AnimatedImageActionTypes.LoadAnimatedImages));
 

@@ -34,7 +34,7 @@ import { DownloadComponent } from './components/download/download.component';
     ReversePipe,
     TimelineComponent,
     ImageSelectorComponent,
-    DownloadComponent
+    DownloadComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +50,9 @@ import { DownloadComponent } from './components/download/download.component';
     StoreModule.forFeature('spin', fromSpin.reducer),
     EffectsModule.forFeature([SpinEffects, PreviewEffects, AnimatedImageEffects]),
     StoreModule.forFeature('preview', fromPreview.reducer),
-    StoreModule.forFeature('animatedImage', fromAnimatedImage.reducer)
+    StoreModule.forFeature('animatedImage', fromAnimatedImage.reducer),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

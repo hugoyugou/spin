@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export enum PreviewActionTypes {
-  LoadPreviews = '[Preview] Load Previews'
+  LoadPreviews = '[Preview] Load Previews',
 }
 
 export class LoadPreviews implements Action {

@@ -11,7 +11,7 @@ import { Subject, Observable } from 'rxjs';
 import { Frame } from '../models/Frame.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ImageService implements OnDestroy {
   blurFilter = new BlurFilter();
@@ -19,10 +19,7 @@ export class ImageService implements OnDestroy {
   animatedImage$: Observable<AnimatedImage>;
   destroy$ = new Subject<boolean>();
 
-  speedToFramesLUT = [
-    1, 50, 40, 30, 25, 20, 15, 12, 8, 6, 5, 4, 3
-  ];
-
+  speedToFramesLUT = [1, 50, 40, 30, 25, 20, 15, 12, 8, 6, 5, 4, 3];
 
   constructor(public store: Store<State>) {
     this.animatedImage$ = this.store.select(selectAnimatedImage);
@@ -107,19 +104,16 @@ export class ImageService implements OnDestroy {
     const context = newCanvas.getContext('2d');
     context.save();
     context.translate(halfSize, halfSize);
-    context.rotate(degree * Math.PI / 180);
+    context.rotate((degree * Math.PI) / 180);
     context.globalCompositeOperation = 'copy';
-    context.drawImage(
-      canvas,
-      0, 0, size, size,
-      -halfSize, -halfSize, size, size
-    );
+    context.drawImage(canvas, 0, 0, size, size, -halfSize, -halfSize, size, size);
     context.restore();
     image.canvas = newCanvas;
     return image;
   }
 
-  exportGif() { // TODO: Let another action trigger download event
+  exportGif() {
+    // TODO: Let another action trigger download event
     let encoder = new GIFEncoder();
     encoder.setRepeat(0);
     encoder.setDelay(20);
@@ -137,41 +131,34 @@ export class ImageService implements OnDestroy {
     encoder.start();
 
     encoder.setTransparent(0x36393f);
-    Object.keys(pendingFrames).sort((a, b) => parseInt(a) - parseInt(b)).forEach((id) => {
-      const frame: Frame = pendingFrames[id];
+    Object.keys(pendingFrames)
+      .sort((a, b) => parseInt(a) - parseInt(b))
+      .forEach((id) => {
+        const frame: Frame = pendingFrames[id];
 
-      const newCanvas = this.copyCanvas(frame.canvas);
-      newCanvas.width = width;
-      newCanvas.height = height;
+        const newCanvas = this.copyCanvas(frame.canvas);
+        newCanvas.width = width;
+        newCanvas.height = height;
 
-      const context = newCanvas.getContext('2d');
-      context.save();
-      context.scale(scaleFactor, scaleFactor);
-      context.fillStyle = "#36393f";
-      context.fillRect(0, 0, size, size);
-      context.drawImage(frame.canvas, 0, 0, size, size);
-      context.restore();
+        const context = newCanvas.getContext('2d');
+        context.save();
+        context.scale(scaleFactor, scaleFactor);
+        context.fillStyle = '#36393f';
+        context.fillRect(0, 0, size, size);
+        context.drawImage(frame.canvas, 0, 0, size, size);
+        context.restore();
 
-      encoder.addFrame(context);
-    });
+        encoder.addFrame(context);
+      });
     encoder.finish();
-    encoder.download("spin-" + Math.floor(new Date().getTime() / 1000) + ".gif");
+    encoder.download('spin-' + Math.floor(new Date().getTime() / 1000) + '.gif');
   }
 
   speedToFrames(speed: number): number {
-    return this.speedToFramesLUT[
-      Math.max(
-        0,
-        Math.min(
-          this.getMaxSpeed(),
-          speed
-        )
-      )
-    ];
+    return this.speedToFramesLUT[Math.max(0, Math.min(this.getMaxSpeed(), speed))];
   }
 
   getMaxSpeed(): number {
     return this.speedToFramesLUT.length - 1;
   }
-
 }

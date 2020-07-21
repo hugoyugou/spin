@@ -1,14 +1,14 @@
 .preview {
-    width: 256px;
-    height: 256px;
-    display: inline-block;
-    border: 1px solid #333;
+  width: 256px;
+  height: 256px;
+  display: inline-block;
+  border: 1px solid #333;
 }
 
 .actions {
-    display: block;
+  display: block;
 }
 
 .speed {
-    width: 256px;
+  width: 256px;
 }

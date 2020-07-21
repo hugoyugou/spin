@@ -1,6 +1,6 @@
 :host {
-    position: relative;
+  position: relative;
 }
 img {
-    image-rendering: pixelated;
+  image-rendering: pixelated;
 }

@@ -1,7 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { SpinActionTypes, Ready, Update, ReadyPayload, NextFrame, SourceChange, SourceLoaded, SourceLoadedPayload, PrepareFrames, PrepareFramesPayload } from '../actions/spin.actions';
-import { withLatestFrom, map, mergeMap, switchMap, takeUntil, mapTo, debounce, debounceTime, tap } from 'rxjs/operators';
+import {
+  SpinActionTypes,
+  Ready,
+  Update,
+  ReadyPayload,
+  NextFrame,
+  SourceChange,
+  SourceLoaded,
+  SourceLoadedPayload,
+  PrepareFrames,
+  PrepareFramesPayload,
+} from '../actions/spin.actions';
+import {
+  withLatestFrom,
+  map,
+  mergeMap,
+  switchMap,
+  takeUntil,
+  mapTo,
+  debounce,
+  debounceTime,
+  tap,
+} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
 import { selectSource, selectSpeed, selectSize, errorImage } from '../reducers/spin.reducer';
@@ -12,7 +33,6 @@ import { from, timer } from 'rxjs';
 
 @Injectable()
 export class SpinEffects {
-
   @Effect()
   spinSourceChange$ = this.actions$.pipe(
     ofType(SpinActionTypes.SourceChange),
@@ -23,25 +43,22 @@ export class SpinEffects {
         image.src = payload.uri;
         image.addEventListener('load', () => {
           const sourceLoadedPayload = {
-            image
+            image,
           } as SourceLoadedPayload;
           resolve(new SourceLoaded(sourceLoadedPayload));
         });
         image.addEventListener('error', () => {
           const sourceLoadedPayload = {
-            image: errorImage
+            image: errorImage,
           } as SourceLoadedPayload;
           resolve(new SourceLoaded(sourceLoadedPayload));
         });
       });
     })
-  )
+  );
 
   @Effect()
-  spinSourceLoaded$ = this.actions$.pipe(
-    ofType(SpinActionTypes.SourceLoaded),
-    mapTo(new Update())
-  )
+  spinSourceLoaded$ = this.actions$.pipe(ofType(SpinActionTypes.SourceLoaded), mapTo(new Update()));
 
   @Effect()
   spinUpdate$ = this.actions$.pipe(
@@ -83,7 +100,7 @@ export class SpinEffects {
       let totalFrames = this.imageService.speedToFrames(speed);
       // Anti-pattern
       const prepareFramesPayload = {
-        totalFrames
+        totalFrames,
       } as PrepareFramesPayload;
       this.store$.dispatch(new PrepareFrames(prepareFramesPayload));
     }),
@@ -98,16 +115,16 @@ export class SpinEffects {
             image: this.imageService.copy(image),
             options: {
               ...options,
-              id: frameId
-            }
+              id: frameId,
+            },
           };
         }),
-        map(payload => {
+        map((payload) => {
           const { image } = payload;
-          payload.image = this.imageService.rotate(image, payload.options.id * 360 / totalFrames);
+          payload.image = this.imageService.rotate(image, (payload.options.id * 360) / totalFrames);
           return payload;
         })
-      )
+      );
     }),
     map((payload) => {
       const { image } = payload;
@@ -144,10 +161,12 @@ export class SpinEffects {
   @Effect()
   playback$ = this.actions$.pipe(
     ofType(SpinActionTypes.Play),
-    switchMap(() => timer(0, 20).pipe(
-      takeUntil(this.actions$.pipe(ofType(SpinActionTypes.Pause, SpinActionTypes.Stop))),
-      mapTo(new NextFrame())
-    ))
+    switchMap(() =>
+      timer(0, 20).pipe(
+        takeUntil(this.actions$.pipe(ofType(SpinActionTypes.Pause, SpinActionTypes.Stop))),
+        mapTo(new NextFrame())
+      )
+    )
   );
 
   // TODO: Dispatch success/fail action
@@ -155,17 +174,14 @@ export class SpinEffects {
   download$ = this.actions$.pipe(
     ofType(SpinActionTypes.Download),
     debounceTime(500),
-    map(() => { // TODO: Use switchMap instead
+    map(() => {
+      // TODO: Use switchMap instead
       this.imageService.exportGif();
     })
-  )
+  );
 
   @Effect()
-  speedUpdate$ = this.actions$.pipe(
-    ofType(SpinActionTypes.SpeedChange),
-    debounceTime(100),
-    mapTo(new Update())
-  );
+  speedUpdate$ = this.actions$.pipe(ofType(SpinActionTypes.SpeedChange), debounceTime(100), mapTo(new Update()));
 
   constructor(private actions$: Actions, private store$: Store<State>, private imageService: ImageService) {
     (<any>window).store = this.store$;
@@ -173,13 +189,13 @@ export class SpinEffects {
 }
 
 interface SpinPayload {
-  image: EditableImage
-  options: SpinOptions
+  image: EditableImage;
+  options: SpinOptions;
 }
 
 interface SpinOptions {
-  id: number
-  blur: boolean
-  speed: number
-  clockwise: boolean
+  id: number;
+  blur: boolean;
+  speed: number;
+  clockwise: boolean;
 }

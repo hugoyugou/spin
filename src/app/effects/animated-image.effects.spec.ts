@@ -10,10 +10,7 @@ describe('AnimatedImageEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        AnimatedImageEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [AnimatedImageEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.get(AnimatedImageEffects);

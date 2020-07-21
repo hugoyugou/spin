@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 export enum AnimatedImageActionTypes {
-  LoadAnimatedImages = '[AnimatedImage] Load AnimatedImages'
+  LoadAnimatedImages = '[AnimatedImage] Load AnimatedImages',
 }
 
 export class LoadAnimatedImages implements Action {

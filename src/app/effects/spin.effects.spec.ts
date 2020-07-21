@@ -10,10 +10,7 @@ describe('SpinEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        SpinEffects,
-        provideMockActions(() => actions$)
-      ]
+      providers: [SpinEffects, provideMockActions(() => actions$)],
     });
 
     effects = TestBed.get(SpinEffects);

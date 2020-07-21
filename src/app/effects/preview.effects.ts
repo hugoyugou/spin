@@ -4,7 +4,6 @@ import { PreviewActionTypes } from '../actions/preview.actions';
 
 @Injectable()
 export class PreviewEffects {
-
   @Effect()
   loadFoos$ = this.actions$.pipe(ofType(PreviewActionTypes.LoadPreviews));
 

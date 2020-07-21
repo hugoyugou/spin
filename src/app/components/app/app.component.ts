@@ -11,7 +11,7 @@ import { ImageService } from '../../services/image.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'spin';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   speed$: Observable<number>;
   maxSpeed: number;
 
-  constructor(public imageService: ImageService, public store: Store<State>){}
+  constructor(public imageService: ImageService, public store: Store<State>) {}
 
   ngOnInit(): void {
     this.animatedImage$ = this.store.select(selectAnimatedImage);
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
 
   onSpeedChange(speed: number): void {
     const speedChangePayload = {
-      speed
+      speed,
     } as SpeedChangePayload;
     this.store.dispatch(new SpeedChange(speedChangePayload));
   }

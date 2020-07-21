@@ -9,13 +9,13 @@ import { Play, Pause, Stop } from '../../actions/spin.actions';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.css']
+  styleUrls: ['./timeline.component.css'],
 })
 export class TimelineComponent implements OnInit {
   animatedImage$: Observable<AnimatedImage>;
   isPause$: Observable<boolean>;
 
-  constructor(public store: Store<State>){}
+  constructor(public store: Store<State>) {}
 
   ngOnInit(): void {
     this.animatedImage$ = this.store.select(selectAnimatedImage);
@@ -31,7 +31,6 @@ export class TimelineComponent implements OnInit {
   }
 
   onStopButtonClick(): void {
-    this.store.dispatch(new Stop());    
+    this.store.dispatch(new Stop());
   }
-
 }
