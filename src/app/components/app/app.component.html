@@ -1,18 +1,18 @@
-
 <div class="actions">
-    <app-image-selector></app-image-selector>
-    <app-download></app-download>
+  <app-image-selector></app-image-selector>
+  <app-download></app-download>
 </div>
 <div class="settings">
-    <mat-slider
-        class="speed"
-        [max]="maxSpeed"
-        min="0"
-        step="1"
-        tickInterval="1"
-        [value]="speed$ | async"
-        (change)="onSpeedChange($event.value)">
-    </mat-slider>
+  <mat-slider
+    class="speed"
+    [max]="maxSpeed"
+    min="0"
+    step="1"
+    tickInterval="1"
+    [value]="speed$ | async"
+    (change)="onSpeedChange($event.value)"
+  >
+  </mat-slider>
 </div>
 <app-animated-image class="preview" [animatedImage]="animatedImage$ | async"></app-animated-image>
 <app-timeline></app-timeline>

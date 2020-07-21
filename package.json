@@ -19,7 +19,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format:fixstaged": "pretty-quick --staged",
-    "format:fix": "prettier --write --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\""
+    "format:fix": "prettier --write --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss,.html}\""
   },
   "private": true,
   "dependencies": {

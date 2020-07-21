@@ -1,3 +1,8 @@
 <div class="animatedImage">
-    <app-frame class="frame" [ngClass]="{'hidden': frame.id != animatedImage.current}" *ngFor="let frame of animatedImage.frames | reverse" [frame]="frame"></app-frame>
+  <app-frame
+    class="frame"
+    [ngClass]="{ hidden: frame.id != animatedImage.current }"
+    *ngFor="let frame of animatedImage.frames | reverse"
+    [frame]="frame"
+  ></app-frame>
 </div>

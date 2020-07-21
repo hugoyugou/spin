@@ -15,8 +15,9 @@
 <div class="frames" *ngIf="animatedImage$ | async as animatedImage">
   <app-frame
     class="frame"
-    [ngClass]="{'current': frame.id == animatedImage.current}"
+    [ngClass]="{ current: frame.id == animatedImage.current }"
     *ngFor="let frame of animatedImage.frames"
-    [frame]="frame">
+    [frame]="frame"
+  >
   </app-frame>
 </div>
