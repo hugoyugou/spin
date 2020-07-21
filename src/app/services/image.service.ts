@@ -87,8 +87,8 @@ export class ImageService implements OnDestroy {
     const halfSize = size / 2;
     this.blurFilter.p0 = { x: halfSize, y: halfSize };
     this.blurFilter.p1 = { x: size, y: halfSize };
-    this.blurFilter.blur = blur;
-    this.blurFilter.blur2 = blur;
+    this.blurFilter.blur = (blur * size) / 256;
+    this.blurFilter.blur2 = (blur * size) / 256;
     this.blurFilter.mode = this.blurFilter.CIRCULAR;
 
     const newCanvas = this.copyCanvas(canvas);
