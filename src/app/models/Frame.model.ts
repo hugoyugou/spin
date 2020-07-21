@@ -1,6 +1,6 @@
 export interface Frame {
   id: number;
-  uri: string;
+  uri?: string;
   delay: number;
   keep?: boolean;
   canvas: HTMLCanvasElement;

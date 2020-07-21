@@ -9,7 +9,8 @@
   height: 64px;
 }
 
-.frame ::ng-deep img {
+.frame ::ng-deep img,
+.frame ::ng-deep canvas {
   width: 64px;
   height: 64px;
 }

@@ -76,7 +76,8 @@ export class SpinEffects {
       )
     ),
     map(([action, [size, source, speed]]) => {
-      const canvas = document.createElement('canvas');
+      const canvasEl = document.createElement('canvas');
+      const canvas = 'OffscreenCanvas' in window ? canvasEl.transferControlToOffscreen() : canvasEl;
       canvas.height = size;
       canvas.width = size;
       const image = {
@@ -149,7 +150,7 @@ export class SpinEffects {
       const { id } = options;
       const frame = {
         id,
-        uri: canvas.toDataURL(),
+        // uri: canvas.toDataURL(),
         delay: 200,
         keep: false,
         canvas,
