@@ -104,6 +104,11 @@ export class SpinEffects {
       payload.image = this.imageService.radialBlur(image, blurFactor);
       return payload;
     }),
+    map((payload) => {
+      const { image } = payload;
+      payload.image = this.imageService.circleMask(image);
+      return payload;
+    }),
     tap((payload) => {
       const { image, options } = payload;
       const { speed } = options;
@@ -138,11 +143,6 @@ export class SpinEffects {
           return chainedPayload;
         })
       );
-    }),
-    map((payload) => {
-      const { image } = payload;
-      payload.image = this.imageService.circleMask(image);
-      return payload;
     }),
     map((payload) => {
       const { image, options } = payload;
