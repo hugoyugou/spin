@@ -67,10 +67,10 @@ export class SpinEffects {
     withLatestFrom(this.store$.select(selectSource)),
     withLatestFrom(this.store$.select(selectSpeed)),
     map(([[[action, size], source], speed]) => {
-      let canvas = document.createElement('canvas');
+      const canvas = document.createElement('canvas');
       canvas.height = size;
       canvas.width = size;
-      let image = {
+      const image = {
         size,
         canvas,
         source,
@@ -97,7 +97,7 @@ export class SpinEffects {
     tap((payload) => {
       const { image, options } = payload;
       const { speed } = options;
-      let totalFrames = this.imageService.speedToFrames(speed);
+      const totalFrames = this.imageService.speedToFrames(speed);
       // Anti-pattern
       const prepareFramesPayload = {
         totalFrames,
@@ -107,8 +107,8 @@ export class SpinEffects {
     mergeMap((payload) => {
       const { image, options } = payload;
       const { speed } = options;
-      let totalFrames = this.imageService.speedToFrames(speed);
-      let frameArray = Array.from(Array(totalFrames).keys());
+      const totalFrames = this.imageService.speedToFrames(speed);
+      const frameArray = Array.from(Array(totalFrames).keys());
       return from(frameArray).pipe(
         map((frameId) => {
           return {
@@ -119,10 +119,13 @@ export class SpinEffects {
             },
           };
         }),
-        map((payload) => {
-          const { image } = payload;
-          payload.image = this.imageService.rotate(image, (payload.options.id * 360) / totalFrames);
-          return payload;
+        map((chainedPayload) => {
+          const { image: chainedImage } = chainedPayload;
+          chainedPayload.image = this.imageService.rotate(
+            chainedImage,
+            (chainedPayload.options.id * 360) / totalFrames
+          );
+          return chainedPayload;
         })
       );
     }),

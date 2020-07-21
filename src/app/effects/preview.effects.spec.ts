@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PreviewEffects } from './preview.effects';
 
 describe('PreviewEffects', () => {
+  // tslint:disable: prefer-const
   let actions$: Observable<any>;
   let effects: PreviewEffects;
 

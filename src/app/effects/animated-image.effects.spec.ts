@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AnimatedImageEffects } from './animated-image.effects';
 
 describe('AnimatedImageEffects', () => {
+  // tslint:disable: prefer-const
   let actions$: Observable<any>;
   let effects: AnimatedImageEffects;
 

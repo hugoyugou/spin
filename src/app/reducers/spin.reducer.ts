@@ -45,8 +45,8 @@ export function reducer(state = initialState, action: SpinActions): State {
       const payload = action.payload;
       const frameId = payload.frame.id;
       let existed = false;
-      let frames = state.animatedImage.frames.map((frame) => {
-        if (frame.id == frameId) {
+      const frames = state.animatedImage.frames.map((frame) => {
+        if (frame.id === frameId) {
           existed = true;
           return payload.frame;
         } else {

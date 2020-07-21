@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { PreviewActions, PreviewActionTypes } from '../actions/preview.actions';
 
+// tslint:disable-next-line: no-empty-interface
 export interface State {}
 
 export const initialState: State = {};

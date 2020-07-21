@@ -14,7 +14,7 @@ export class ImageSelectorComponent implements OnInit {
   ngOnInit() {}
 
   onFileChange(files: FileList): void {
-    if (files.length != 1) return;
+    if (files.length !== 1) return;
     const file = files[0];
     const sourceChangePayload = {
       uri: window.URL.createObjectURL(file),

@@ -114,7 +114,7 @@ export class ImageService implements OnDestroy {
 
   exportGif() {
     // TODO: Let another action trigger download event
-    let encoder = new GIFEncoder();
+    const encoder = new GIFEncoder();
     encoder.setRepeat(0);
     encoder.setDelay(20);
     const frames = this.animatedImage.frames;
@@ -124,7 +124,7 @@ export class ImageService implements OnDestroy {
     const width = downSize;
     const height = downSize;
     encoder.setSize(width, height);
-    let pendingFrames: { [id: number]: Frame } = {};
+    const pendingFrames: { [id: number]: Frame } = {};
     frames.forEach((frame) => {
       pendingFrames[frame.id] = frame;
     });
@@ -132,7 +132,7 @@ export class ImageService implements OnDestroy {
 
     encoder.setTransparent(0x36393f);
     Object.keys(pendingFrames)
-      .sort((a, b) => parseInt(a) - parseInt(b))
+      .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
       .forEach((id) => {
         const frame: Frame = pendingFrames[id];
 

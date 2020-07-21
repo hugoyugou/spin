@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SpinEffects } from './spin.effects';
 
 describe('SpinEffects', () => {
+  // tslint:disable: prefer-const
   let actions$: Observable<any>;
   let effects: SpinEffects;
 
