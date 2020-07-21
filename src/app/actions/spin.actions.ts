@@ -13,6 +13,7 @@ export enum SpinActionTypes {
   NextFrame = '[Spin] NextFrame',
   Download = '[Spin] Download',
   SpeedChange = '[Spin] SpeedChange',
+  SizeChange = '[Spin] SizeChange',
   PrepareFrames = '[Spin] PrepareFrames',
 }
 
@@ -81,6 +82,16 @@ export interface SpeedChangePayload {
   speed: number;
 }
 
+export class SizeChange implements Action {
+  readonly type = SpinActionTypes.SizeChange;
+
+  constructor(public payload: SizeChangePayload) {}
+}
+
+export interface SizeChangePayload {
+  size: number;
+}
+
 export class PrepareFrames implements Action {
   readonly type = SpinActionTypes.PrepareFrames;
 
@@ -102,4 +113,5 @@ export type SpinActions =
   | NextFrame
   | Download
   | SpeedChange
+  | SizeChange
   | PrepareFrames;

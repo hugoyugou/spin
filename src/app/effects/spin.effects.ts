@@ -186,6 +186,9 @@ export class SpinEffects {
   @Effect()
   speedUpdate$ = this.actions$.pipe(ofType(SpinActionTypes.SpeedChange), debounceTime(100), mapTo(new Update()));
 
+  @Effect()
+  sizeUpdate$ = this.actions$.pipe(ofType(SpinActionTypes.SizeChange), debounceTime(100), mapTo(new Update()));
+
   constructor(private actions$: Actions, private store$: Store<State>, private imageService: ImageService) {
     (<any>window).store = this.store$;
   }

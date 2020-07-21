@@ -12,3 +12,7 @@
 .speed {
   width: 256px;
 }
+
+.settings mat-slider {
+  display: block;
+}

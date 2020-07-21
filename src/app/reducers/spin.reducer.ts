@@ -104,6 +104,12 @@ export function reducer(state = initialState, action: SpinActions): State {
         speed: action.payload.speed,
       };
 
+    case SpinActionTypes.SizeChange:
+      return {
+        ...state,
+        size: action.payload.size,
+      };
+
     case SpinActionTypes.PrepareFrames: {
       return {
         ...state,

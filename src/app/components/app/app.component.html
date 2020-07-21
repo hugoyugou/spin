@@ -13,6 +13,16 @@
     (change)="onSpeedChange($event.value)"
   >
   </mat-slider>
+  <mat-slider
+    class="speed"
+    max="1024"
+    min="256"
+    step="64"
+    tickInterval="1"
+    [value]="size$ | async"
+    (change)="onSizeChange($event.value)"
+  >
+  </mat-slider>
 </div>
 <app-animated-image class="preview" [animatedImage]="animatedImage$ | async"></app-animated-image>
 <app-timeline></app-timeline>
