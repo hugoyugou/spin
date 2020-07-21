@@ -5,7 +5,7 @@
   "homepage": "https://github.com/hugoyugou/spin",
   "bugs": "https://github.com/hugoyugou/spin/issues",
   "engines": {
-    "node": ">=8.9.1 <9.0.0"
+    "node": ">=12.16.2 <13.0.0"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.7.0",
+    "@angular-devkit/build-angular": "^0.1000.3",
     "@angular/cli": "~6.1.2",
     "@angular/compiler-cli": "^6.1.0",
     "@angular/language-service": "^6.1.0",
