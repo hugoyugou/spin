@@ -22,6 +22,7 @@ import {
   debounce,
   debounceTime,
   tap,
+  concatMap,
 } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../reducers';
@@ -29,7 +30,7 @@ import { selectSource, selectSpeed, selectSize, errorImage } from '../reducers/s
 import { ImageService } from '../services/image.service';
 import { EditableImage } from '../models/EditableImage.model';
 import { Frame } from '../models/Frame.model';
-import { from, timer } from 'rxjs';
+import { from, timer, combineLatest, of } from 'rxjs';
 
 @Injectable()
 export class SpinEffects {
@@ -63,10 +64,18 @@ export class SpinEffects {
   @Effect()
   spinUpdate$ = this.actions$.pipe(
     ofType(SpinActionTypes.Update),
-    withLatestFrom(this.store$.select(selectSize)),
-    withLatestFrom(this.store$.select(selectSource)),
-    withLatestFrom(this.store$.select(selectSpeed)),
-    map(([[[action, size], source], speed]) => {
+    concatMap((action) =>
+      of(action).pipe(
+        withLatestFrom(
+          combineLatest([
+            this.store$.select(selectSize),
+            this.store$.select(selectSource),
+            this.store$.select(selectSpeed),
+          ])
+        )
+      )
+    ),
+    map(([action, [size, source, speed]]) => {
       const canvas = document.createElement('canvas');
       canvas.height = size;
       canvas.width = size;
