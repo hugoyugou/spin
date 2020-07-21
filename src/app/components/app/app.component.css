@@ -1,7 +1,18 @@
+:host {
+  display: block;
+  padding-top: 20px;
+}
+
+:host > * {
+  margin: 0 auto;
+  width: fit-content;
+  display: block;
+}
+
 .preview {
   width: 256px;
   height: 256px;
-  display: inline-block;
+  display: block;
   border: 1px solid #333;
 }
 
@@ -14,8 +25,22 @@
   display: block;
 }
 
+.actions > * {
+  margin: 6px;
+}
+
 .speed {
   width: 256px;
+}
+
+.settings {
+  padding-top: 20px;
+}
+
+.settings > div {
+  text-align: center;
+  text-transform: uppercase;
+  color: #555555;
 }
 
 .settings mat-slider {
